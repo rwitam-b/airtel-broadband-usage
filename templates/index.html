@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Airtel Usage - SJR Spencer D402</title>
+</head>
+
+<body>
+    <br><br>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header strong"> </div>
+            <div class="card-body text-center">
+                <h5 class="card-title">Period Remaining</h5>
+                <p id="1" class="card-text">{{ data["periodRemaining"] }}</p>
+                
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header strong"> </div>
+            <div class="card-body text-center">
+                <h5 class="card-title">Data Used</h5>
+                <p id="2" class="card-text">{{ data["dataUsed"] }}</p>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header strong"> </div>
+            <div class="card-body text-center">
+                <h5 class="card-title">Data Remaining</h5>
+                <p id="3" class="card-text">{{ data["dataRemaining"] }}</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
