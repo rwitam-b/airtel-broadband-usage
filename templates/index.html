@@ -5,40 +5,57 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Airtel Usage - SJR Spencer D402</title>
+    <title>{{ data["title"] }}</title>
 </head>
 
 <body>
     <br><br>
     <div class="container-fluid">
+        <h1 class="text-center">{{ data["title"] }}</h1>
         <div class="card">
             <div class="card-header strong"> </div>
             <div class="card-body text-center">
                 <h5 class="card-title">Period Remaining</h5>
-                <p id="1" class="card-text">{{ data["periodRemaining"] }}</p>
-                
+                <p id="period" class="card-text">{{ data["periodRemaining"] }}</p>
             </div>
         </div>
         <br>
         <div class="card">
             <div class="card-header strong"> </div>
             <div class="card-body text-center">
-                <h5 class="card-title">Data Used</h5>
-                <p id="2" class="card-text">{{ data["dataUsed"] }}</p>
+                <h5 class="card-title">Data Statistics</h5>
+                <p id="dataStat" class="card-text"></p>
+            </div>
+            <div class="progress">
+                <div id="d_used" class="progress-bar bg-danger" role="progressbar" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                <div id="d_remaining" class="progress-bar bg-success" role="progressbar" aria-valuemin="0"
+                    aria-valuemax="100"></div>
             </div>
         </div>
-        <br>
-        <div class="card">
-            <div class="card-header strong"> </div>
-            <div class="card-body text-center">
-                <h5 class="card-title">Data Remaining</h5>
-                <p id="3" class="card-text">{{ data["dataRemaining"] }}</p>
-            </div>
-        </div>
+
     </div>
 </body>
+
+<script>
+    $(document).ready(function () {
+        let period = '{{ data["periodRemaining"] }}';
+        let dataUsed = parseFloat('{{ data["dataUsed"] }}');
+        let dataRemaining = parseFloat('{{ data["dataRemaining"] }}');
+        let totalData = dataUsed + dataRemaining;
+        let usagePercentage = ((dataUsed / totalData) * 100).toFixed(2);
+        let remainingPercentage = (100 - usagePercentage).toFixed(2);
+
+        $("#period").text(period.substring(0, period.length - 1));
+        $("#dataStat").text(`${dataUsed} GB used of ${totalData} GB`);
+        $("#d_used").css("width", usagePercentage + "%").text(usagePercentage + " %");
+        $("#d_remaining").css("width", remainingPercentage + "%").text(remainingPercentage + " %");
+    });
+</script>
 
 </html>

@@ -12,7 +12,12 @@ import datetime
 import os
 import sys
 
-data = {}
+data = {
+    "title": os.getenv("PAGE_TITLE", ""),
+    "periodRemaining": 0,
+    "dataUsed": 0,
+    "dataRemaining": 0
+}
 userId = os.getenv("AIRTEL_USER_ID", "")
 password = os.getenv("AIRTEL_PASSWORD", "")
 chromeBinary = os.getenv("GOOGLE_CHROME_BIN", "")
@@ -55,11 +60,9 @@ def getAirtelData(src, userId, password):
         dataUsed = usedData.get_attribute('innerHTML')
         dataRemaining = detailsParagraphs[5].text
 
-        data = {
-            "periodRemaining": periodRemaining,
-            "dataUsed": dataUsed,
-            "dataRemaining": dataRemaining
-        }
+        data["periodRemaining"] = periodRemaining
+        data["dataUsed"] = dataUsed
+        data["dataRemaining"] = dataRemaining
         print(data)
     except:
         e = sys.exc_info()[0]
