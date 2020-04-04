@@ -30,6 +30,7 @@
             <div class="card-body text-center">
                 <h5 class="card-title">Data Statistics</h5>
                 <p id="dataStat" class="card-text"></p>
+                <p id="dataRemaining" class="card-text"></p>
             </div>
             <div class="progress">
                 <div id="d_used" class="progress-bar bg-danger" role="progressbar" aria-valuemin="0"
@@ -53,8 +54,9 @@
 
         $("#period").text(period.substring(0, period.length - 1));
         $("#dataStat").text(`${dataUsed} GB used of ${totalData} GB`);
-        $("#d_used").css("width", usagePercentage + "%").text(usagePercentage + " %");
-        $("#d_remaining").css("width", remainingPercentage + "%").text(remainingPercentage + " %");
+        $("#dataRemaining").text(`${dataRemaining} GB remaining!`);
+        $("#d_used").css("width", usagePercentage + "%");
+        $("#d_remaining").css("width", remainingPercentage + "%");
     });
 </script>
 
