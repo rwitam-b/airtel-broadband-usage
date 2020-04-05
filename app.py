@@ -34,7 +34,7 @@ def getAirtelData(src, userId, password):
     chrome_options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(
         executable_path=chromeDriver, chrome_options=chrome_options)
-    driver.set_page_load_timeout(20)
+    driver.set_page_load_timeout(10)
     URL = 'https://www.airtel.in/s/selfcare?normalLogin'
     try:
         driver.get(URL)
