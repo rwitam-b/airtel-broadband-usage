@@ -38,20 +38,24 @@ def getAirtelData(src, userId, password):
     URL = 'https://www.airtel.in/s/selfcare?normalLogin'
     try:
         driver.get(URL)
-        print(driver.page_source.encode("utf-8"))
+        print("Login page loaded!")
         wait = WebDriverWait(driver, 10)
         mobileNumberField = wait.until(
             EC.presence_of_element_located((By.NAME, "mobileNumber")))
         passwordField = driver.find_element_by_name("password")
         submitButton = driver.find_element_by_id("loginButtonSpan")
-        print(driver.page_source.encode("utf-8"))
 
         mobileNumberField.send_keys(userId)
         passwordField.send_keys(password)
         submitButton.click()
+        print("Form submitted!")
 
+        detailsDiv = wait.until(
+            EC.presence_of_element_located((By.CLASS_NAME, "item")))
+        print("Data divs loaded")
         usedData = wait.until(
             EC.presence_of_element_located((By.CLASS_NAME, "used_tooltip")))
+        print("Tooltip loaded")
         detailsDiv = driver.find_elements_by_class_name("item")[1]
         detailsParagraphs = detailsDiv.find_elements_by_tag_name("p")
 
