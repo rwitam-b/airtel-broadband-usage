@@ -13,10 +13,7 @@ import os
 import sys
 
 data = {
-    "title": os.getenv("PAGE_TITLE", ""),
-    "periodRemaining": 0,
-    "dataUsed": 0,
-    "dataRemaining": 0
+    "title": os.getenv("PAGE_TITLE", "")
 }
 userId = os.getenv("AIRTEL_USER_ID", "")
 password = os.getenv("AIRTEL_PASSWORD", "")
@@ -37,7 +34,7 @@ def getAirtelData(src, userId, password):
     chrome_options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(
         executable_path=chromeDriver, chrome_options=chrome_options)
-    driver.set_page_load_timeout(10)
+    driver.set_page_load_timeout(20)
     URL = 'https://www.airtel.in/s/selfcare?normalLogin'
     try:
         driver.get(URL)
@@ -86,6 +83,8 @@ def init_scheduler():
 @app.route("/")
 def index():
     global data
+    if "dataRemaining" not in thisdict:
+        getAirtelData("fallback of initial failure", userId, password)
     return render_template("index.html", data=data)
 
 
