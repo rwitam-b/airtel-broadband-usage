@@ -83,7 +83,7 @@ def init_scheduler():
 @app.route("/")
 def index():
     global data
-    if "dataRemaining" not in thisdict:
+    if "dataRemaining" not in data:
         getAirtelData("fallback of initial failure", userId, password)
     return render_template("index.html", data=data)
 
