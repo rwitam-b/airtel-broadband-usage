@@ -38,11 +38,13 @@ def getAirtelData(src, userId, password):
     URL = 'https://www.airtel.in/s/selfcare?normalLogin'
     try:
         driver.get(URL)
+        print driver.page_source.encode("utf-8")
         wait = WebDriverWait(driver, 10)
         mobileNumberField = wait.until(
             EC.presence_of_element_located((By.NAME, "mobileNumber")))
         passwordField = driver.find_element_by_name("password")
         submitButton = driver.find_element_by_id("loginButtonSpan")
+        print driver.page_source.encode("utf-8")
 
         mobileNumberField.send_keys(userId)
         passwordField.send_keys(password)
@@ -83,8 +85,8 @@ def init_scheduler():
 @app.route("/")
 def index():
     global data
-    if "dataRemaining" not in data:
-        getAirtelData("fallback of initial failure", userId, password)
+    # if "dataRemaining" not in data:
+    #     getAirtelData("fallback of initial failure", userId, password)
     return render_template("index.html", data=data)
 
 
